@@ -19,6 +19,7 @@ services:
       DOMAIN: webhooks.DOMAIN.TLD # Don't include https
       HOMESERVER: https://matrix.org
       PORT: 3000
+      PREFIX: '!'
       SHADOW_DATABASE_URL: postgres://user:pass@postgresql/matrix_webhooks_shadow
     volumes:
       - ${PWD}/matrixwebhooks:/app/data

@@ -5,6 +5,7 @@ declare namespace NodeJS {
     DOMAIN: string;
     HOMESERVER: string;
     PORT?: number;
+    PREFIX?: string;
     SHADOW_DATABASE_URL: string;
   }
 }
