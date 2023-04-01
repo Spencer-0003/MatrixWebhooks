@@ -33,6 +33,9 @@ export class Ready extends Event {
 
       await this.client.db.deleteWebhook(token);
       return this.client.replyText(roomId, event, 'Webhook successfully deleted.');
+    } else if (content == '!webhooks') {
+      const webhooks = (await this.client.db.getWebhooks()).filter(webhook => webhook.ownerId === event.sender);
+      return this.client.replyText(roomId, event, !webhooks.length ? 'You have no webhooks.' : webhooks.map(webhook => webhook.id).join('\n'));
     }
   }
 }
