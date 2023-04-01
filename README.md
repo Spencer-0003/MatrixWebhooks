@@ -2,9 +2,16 @@
 A simple way to receive notifications.
 
 ## Known Issues
-Currently you can't use webhooks in encrypted rooms, this seems to be an issue with the matrix-bot-sdk and should be resolved after they merge support for pre-shared keys.
+Unfortunately, webhooks can't be used in encrypted rooms right now. This issue should be resolved once matrix-bot-sdk merges support for pre-shared keys.
 
-## Deploy
+## How To Use
+Using MatrixWebhooks is simple. After deploying, just invite the bot user to a room and you're good to go. Here are the available commands:
+
+* `createwebhook` - Creates a new webhook for the current room.
+* `deletewebhook <webhook_token>` - Deletes an existing webhook with the matching token.
+* `webhooks` - Displays a list of all webhooks you've created along with their associated room IDs.
+
+To deploy, use the following Docker Compose configuration:
 ```yml
 version: '3.9'
 
