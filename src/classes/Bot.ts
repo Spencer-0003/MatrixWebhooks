@@ -7,12 +7,12 @@ import {
 } from 'matrix-bot-sdk';
 import { readdirSync } from 'fs';
 import { join, parse } from 'path';
-import { Database } from '@classes/Database';
+import { db } from '@classes/Database';
 
 // Create class
 export class WebhookClient extends MatrixClient {
   // Properties
-  public db: Database;
+  public db: typeof db;
 
   // Constructor
   public constructor(homeserver: string, accessToken: string) {
@@ -23,7 +23,7 @@ export class WebhookClient extends MatrixClient {
       new RustSdkCryptoStorageProvider('./data/encryption')
     );
 
-    this.db = new Database();
+    this.db = db;
   }
 
   // Methods
