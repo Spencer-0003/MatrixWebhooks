@@ -21,7 +21,7 @@ services:
       PORT: 3000
       SHADOW_DATABASE_URL: postgres://user:pass@postgresql/matrix_webhooks_shadow
     volumes:
-      - ${PWD}/matrixwebhooks:/data
+      - ${PWD}/matrixwebhooks:/app/data
 ```
 
 ## Donate
