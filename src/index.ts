@@ -6,7 +6,7 @@
 import 'module-alias/register';
 import 'dotenv/config';
 import fastify from 'fastify';
-import { WebhookClient } from '@classes/Bot';
+import { client } from '@classes/Bot';
 
 // Environment variables
 const { ACCESS_TOKEN, DATABASE_URL, DOMAIN, HOMESERVER, SHADOW_DATABASE_URL } = process.env;
@@ -22,4 +22,4 @@ const server = fastify()
 
 // Start server and create bot
 server.listen({ host: '0.0.0.0', port: process.env.PORT ?? 3000 }, err => console.log(`[MatrixWebhooks]: ${err ? 'Port in use.' : 'Server listening on designated port.'}`));
-new WebhookClient(HOMESERVER, ACCESS_TOKEN).launch();
+client.launch();
