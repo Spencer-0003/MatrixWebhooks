@@ -7,6 +7,9 @@
 		"sourceType": "module",
 		"project": "./tsconfig.json"
 	},
+    "rules": {
+        "curly": ["error", "multi"]
+    },
     "plugins": ["@typescript-eslint", "jsdoc", "sonarjs"],
 	"extends": ["eslint:recommended", "plugin:@typescript-eslint/eslint-recommended", "plugin:@typescript-eslint/recommended", "plugin:sonarjs/recommended"]
 }

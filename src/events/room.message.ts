@@ -42,7 +42,9 @@ export class Ready extends Event {
       return this.client.replyText(
         roomId,
         event,
-        !webhooks.length ? 'You have no webhooks.' : webhooks.map(webhook => webhook.token).join('\n')
+        !webhooks.length
+          ? 'You have no webhooks.'
+          : webhooks.map(webhook => webhook.token).join('\n')
       );
     }
   }

@@ -18,9 +18,8 @@ export default async function (server: FastifyInstance) {
 		const webhook = await db.getWebhook((req.params as webhookParameters).token);
 		const content = (req.body as Record<string, string>).content;
 
-		if (!webhook || !content) {
+		if (!webhook || !content)
 			return res.send({ error: !webhook ? 'Invalid webhook.' : 'You didn\'t specify any content.' });
-		}
 
 		client.sendMessage(webhook.roomId, { body: content, msgtype: 'm.text' });
 		return res.send('OK');
