@@ -30,7 +30,7 @@ LABEL maintainer="Spencer-0003"
 
 ENV CHECKPOINT_DISABLE=1
 
-RUN apk add --no-cache bash
+RUN apt-get update && apt-get install -y bash && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 
 COPY --from=cleaner /app ./
