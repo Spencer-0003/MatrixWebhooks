@@ -9,9 +9,9 @@ import fastify from 'fastify';
 import { WebhookClient } from '@classes/Bot';
 
 // Environment variables
-const { ACCESS_TOKEN, DATABASE_URL, HOMESERVER, SHADOW_DATABASE_URL } = process.env;
+const { ACCESS_TOKEN, DATABASE_URL, DOMAIN, HOMESERVER, SHADOW_DATABASE_URL } = process.env;
 
-if (!ACCESS_TOKEN || !DATABASE_URL || !HOMESERVER ||!SHADOW_DATABASE_URL)
+if (!ACCESS_TOKEN || !DATABASE_URL || !DOMAIN || !HOMESERVER ||!SHADOW_DATABASE_URL)
   throw new Error('[MatrixWebhooks]: Missing environment variables.');
 
 // Create server
