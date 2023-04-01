@@ -1,14 +1,14 @@
 // Import types
-import type { WebhookClient } from '@classes/Bot';
+import { client } from '@classes/Bot';
 
 // Export class
 export abstract class Event {
   // Properties
-  public client: WebhookClient;
+  public client: typeof client;
 
   // Constructor
-  protected constructor(client: WebhookClient) {
-    this.client = client;
+  protected constructor(webhookClient: typeof client) {
+    this.client = webhookClient;
   }
 
   // Methods

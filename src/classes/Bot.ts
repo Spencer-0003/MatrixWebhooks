@@ -10,7 +10,7 @@ import { join, parse } from 'path';
 import { db } from '@classes/Database';
 
 // Create class
-export class WebhookClient extends MatrixClient {
+class WebhookClient extends MatrixClient {
   // Properties
   public db: typeof db;
 
@@ -44,3 +44,6 @@ export class WebhookClient extends MatrixClient {
     this.start();
   }
 }
+
+// Export
+export const client = new WebhookClient(process.env.HOMESERVER, process.env.ACCESS_TOKEN);
