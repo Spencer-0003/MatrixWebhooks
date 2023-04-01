@@ -34,6 +34,7 @@
     "typescript": "5.0.3"
   },
   "_moduleAliases": {
-    "@classes": "dist/classes"
+    "@classes": "dist/classes",
+    "@routes": "dist/routes"
   }
 }

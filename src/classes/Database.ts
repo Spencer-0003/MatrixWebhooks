@@ -2,7 +2,8 @@
 import type { Webhook } from '@prisma/client';
 import { PrismaClient } from '@prisma/client';
 
-export class Database {
+// Class
+class Database {
   // Properties
   private readonly prisma: PrismaClient;
 
@@ -40,3 +41,6 @@ export class Database {
     return this.prisma.webhook.delete({ where: { token } });
   }
 }
+
+// Export
+export const db = new Database();
