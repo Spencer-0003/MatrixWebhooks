@@ -30,4 +30,13 @@ export class Database {
   public getWebhook(token: string): Promise<Webhook | null> {
     return this.prisma.webhook.findUnique({ where: { token } });
   }
+
+  /**
+   * deleteWebhook
+   * @param token - string
+   * @returns void
+   */
+  public deleteWebhook(token: string): Promise<Webhook> {
+    return this.prisma.webhook.delete({ where: { token } });
+  }
 }
