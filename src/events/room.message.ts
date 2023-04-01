@@ -35,7 +35,7 @@ export class Ready extends Event {
 
       await this.client.db.deleteWebhook(token);
       return this.client.replyText(roomId, event, 'Webhook successfully deleted.');
-    } else if (content == `${prefix}webhooks`) {
+    } else if (content === `${prefix}webhooks`) {
       const webhooks = (await this.client.db.getWebhooks()).filter(
         webhook => webhook.ownerId === event.sender
       );
