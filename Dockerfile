@@ -1,5 +1,5 @@
 # Compiler
-FROM node:19.8.1-alpine3.16 as compiler
+FROM node:19.8.1-bullseye-slim as compiler
 LABEL maintainer="Spencer-0003"
 
 ENV CHECKPOINT_DISABLE=1
@@ -12,7 +12,7 @@ COPY . ./
 RUN yarn prisma generate && yarn build
 
 # Cleaner
-FROM node:19.8.1-alpine3.16 as cleaner
+FROM node:19.8.1-bullseye-slim as cleaner
 LABEL maintainer="Spencer-0003"
 
 ENV CHECKPOINT_DISABLE=1
@@ -25,7 +25,7 @@ COPY --from=compiler /app/prisma ./prisma
 RUN yarn --production=true
 
 # Runner
-FROM node:19.8.1-alpine3.16
+FROM node:19.8.1-bullseye-slim
 LABEL maintainer="Spencer-0003"
 
 ENV CHECKPOINT_DISABLE=1
