@@ -1,6 +1,8 @@
 // Import classes
 import { Event } from '@classes/Event';
 
+const prefix = process.env.PREFIX ?? '!';
+
 // Export class
 export class Ready extends Event {
   // Docs say to use "any", ew: https://turt2live.github.io/matrix-bot-sdk/tutorial-bot.html
@@ -9,7 +11,7 @@ export class Ready extends Event {
 
     const content = event.content.body;
 
-    if (content === '!createwebhook') {
+    if (content === `${prefix}createwebhook`) {
       const webhook = await this.client.db.createWebhook({ roomId, ownerId: event.sender });
 
       return this.client.replyText(
@@ -17,7 +19,7 @@ export class Ready extends Event {
         event,
         `Webhook created! https://${process.env.DOMAIN}/webhooks/${webhook.token}`
       );
-    } else if (content.startsWith('!deletewebhook')) {
+    } else if (content.startsWith(`${prefix}deletewebhook`)) {
       const token = content.split(' ')[1];
 
       if (!token) return this.client.replyText(roomId, event, 'You must provide a webhook token.');
@@ -33,9 +35,15 @@ export class Ready extends Event {
 
       await this.client.db.deleteWebhook(token);
       return this.client.replyText(roomId, event, 'Webhook successfully deleted.');
-    } else if (content == '!webhooks') {
-      const webhooks = (await this.client.db.getWebhooks()).filter(webhook => webhook.ownerId === event.sender);
-      return this.client.replyText(roomId, event, !webhooks.length ? 'You have no webhooks.' : webhooks.map(webhook => webhook.id).join('\n'));
+    } else if (content == `${prefix}webhooks`) {
+      const webhooks = (await this.client.db.getWebhooks()).filter(
+        webhook => webhook.ownerId === event.sender
+      );
+      return this.client.replyText(
+        roomId,
+        event,
+        !webhooks.length ? 'You have no webhooks.' : webhooks.map(webhook => webhook.id).join('\n')
+      );
     }
   }
 }
