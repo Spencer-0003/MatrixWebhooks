@@ -44,7 +44,7 @@ export class Ready extends Event {
         event,
         !webhooks.length
           ? 'You have no webhooks.'
-          : webhooks.map(webhook => webhook.token).join('\n')
+          : webhooks.map(webhook => `Token: ${webhook.token} - Room ID: ${webhook.roomId}`).join('\n')
       );
     }
   }
