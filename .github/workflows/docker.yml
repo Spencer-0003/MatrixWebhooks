@@ -36,5 +36,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ steps.metadata.outputs.tags }}
+          tags: spencer0003/matrixwebhooks:latest
           labels: ${{ steps.metadata.outputs.labels }}
