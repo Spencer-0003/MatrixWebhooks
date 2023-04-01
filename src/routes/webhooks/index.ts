@@ -6,7 +6,7 @@ import { client } from '@classes/Bot';
 import { db } from '@classes/Database';
 
 // Endpoints
-// skipcq: JS-0376
+// skipcq: JS-0376, JS-0116
 export default async function (server: FastifyInstance) {
 	server.get('/:token', async (req, res) => {
 		const webhook = await db.getWebhook((req.params as webhookParameters).token);
