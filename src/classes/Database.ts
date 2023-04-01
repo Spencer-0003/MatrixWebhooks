@@ -33,6 +33,14 @@ class Database {
   }
 
   /**
+   * getWebhooks
+   * @returns All wevhooks
+   */
+  public getWebhooks(): Promise<Webhook[]> {
+    return this.prisma.webhook.findMany();
+  }
+
+  /**
    * deleteWebhook
    * @param token - string
    * @returns void
