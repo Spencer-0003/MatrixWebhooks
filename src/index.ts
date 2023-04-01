@@ -17,6 +17,7 @@ if (!ACCESS_TOKEN || !DATABASE_URL || !DOMAIN || !HOMESERVER ||!SHADOW_DATABASE_
 // Create server
 const server = fastify()
   .register(import('@fastify/helmet'))
+  .register(import('@fastify/formbody'))
   .register(import('@routes/webhooks'), { prefix: '/webhooks' })
   .get('/', () => 'Ready to receive events.');
 
