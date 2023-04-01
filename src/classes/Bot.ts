@@ -1,5 +1,5 @@
 // Import classes and types
-import { AutojoinRoomsMixin, MatrixClient } from 'matrix-bot-sdk';
+import { AutojoinRoomsMixin, MatrixClient, SimpleFsStorageProvider, RustSdkCryptoStorageProvider } from 'matrix-bot-sdk';
 import { readdirSync } from 'fs';
 import { join, parse } from 'path';
 import { Database } from '@classes/Database';
@@ -11,7 +11,7 @@ export class WebhookClient extends MatrixClient {
 
   // Constructor
   public constructor(homeserver: string, accessToken: string) {
-    super(homeserver, accessToken);
+    super(homeserver, accessToken, new SimpleFsStorageProvider('./data/state.json'), new RustSdkCryptoStorageProvider('./data/encryption'));
 
     this.db = new Database();
   }
