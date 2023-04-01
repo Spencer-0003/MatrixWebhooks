@@ -1,0 +1,40 @@
+name: Publish Docker image
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - .github/**
+      - '!.github/workflows/docker.yml'
+      - .vscode/**
+      - .gitignore
+      - LICENSE
+      - README.md
+
+jobs:
+  dockerhub:
+    name: Publish to DockerHub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Extract Metadata
+        id: metadata
+        uses: docker/metadata-action@v4
+        with:
+          images: spencer0003/matrixwebhooks
+
+      - name: Publish
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.metadata.outputs.tags }}
+          labels: ${{ steps.metadata.outputs.labels }}
