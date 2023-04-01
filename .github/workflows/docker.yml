@@ -32,7 +32,7 @@ jobs:
           images: spencer0003/matrixwebhooks
 
       - name: Publish
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           push: true
