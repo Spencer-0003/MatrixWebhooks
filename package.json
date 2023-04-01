@@ -9,10 +9,9 @@
   "private": false,
   "scripts": {
     "build": "tsc",
-    "dev": "yarn build; yarn start",
+    "dev": "yarn build && yarn start",
     "lint": "prettier --config .prettierrc ./src/**/*.ts --write && eslint . --ext .ts",
-    "docker:start": "prisma migrate deploy; yarn start",
-    "start": "node dist"
+    "start": "prisma migrate deploy && node dist/index.js"
   },
   "dependencies": {
     "@fastify/helmet": "10.1.0",

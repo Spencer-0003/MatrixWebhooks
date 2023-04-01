@@ -10,8 +10,8 @@ export class WebhookClient extends MatrixClient {
   public db: Database;
 
   // Constructor
-  public constructor(accessToken: string, homeserver: string) {
-    super(accessToken, homeserver);
+  public constructor(homeserver: string, accessToken: string) {
+    super(homeserver, accessToken);
 
     this.db = new Database();
   }
