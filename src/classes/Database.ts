@@ -38,10 +38,19 @@ class Database {
 
   /**
    * getWebhooks
-   * @returns All wevhooks
+   * @returns All webhooks
    */
   public getWebhooks(): Promise<Webhook[]> {
     return this.prisma.webhook.findMany();
+  }
+
+  /**
+   * clearRoom
+   * @param roomId
+   * @returns void
+   */
+  public clearRoom(roomId: string) {
+    return this.prisma.webhook.deleteMany({ where: { roomId } });
   }
 
   /**
