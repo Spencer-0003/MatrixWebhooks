@@ -13,5 +13,6 @@ model Webhook {
   token     String   @unique @default(cuid())
   roomId    String
   ownerId   String
+  secret    String?
   createdAt DateTime @default(now())
 }
