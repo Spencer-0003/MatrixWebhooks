@@ -21,7 +21,7 @@ export class RoomMessage extends Event {
         roomId,
         event,
         `Webhook created! https://${process.env.DOMAIN}/webhooks/${webhook.token}${
-          secret ? ' - Secret: ' + secret : undefined
+          secret ? ` - Secret: ${secret}` : undefined
         }`
       );
     } else if (content.startsWith(`${prefix}deletewebhook`)) {
