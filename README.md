@@ -1,15 +1,17 @@
 # Matrix Webhooks
 A simple way to receive notifications.
 
-## Known Issues
-Unfortunately, webhooks can't be used in encrypted rooms right now. This issue should be resolved once matrix-bot-sdk merges support for pre-shared keys.
-
 ## How To Use
 Using MatrixWebhooks is simple. After deploying, just invite the bot user to a room and you're good to go. Here are the available commands:
 
 * `createwebhook <protected>` - Creates a new webhook for the current room. If protected is true, a secret will be generated to prevent people from spamming your webhook. Defaults to false.
 * `deletewebhook <webhook_token>` - Deletes an existing webhook with the matching token.
 * `webhooks` - Displays a list of all webhooks you've created along with their associated room IDs.
+
+To get your access token run this command:
+```
+curl -XPOST -d '{"type":"m.login.password", "user":"example", "password":"example"}' "HOME_SERVER_URL/_matrix/client/r0/login"
+```
 
 To deploy, use the following Docker Compose configuration:
 ```yml
@@ -21,7 +23,7 @@ services:
     container_name: MatrixWebhooks
     restart: unless-stopped
     environment:
-      ACCESS_TOKEN: Check out https://t2bot.io/docs/access_tokens for additional information
+      ACCESS_TOKEN: YOUR_ACCESS_TOKEN
       DATABASE_URL: postgres://user:pass@postgresql/matrix_webhooks
       DOMAIN: webhooks.DOMAIN.TLD # Don't include https
       HOMESERVER: https://matrix.org
