@@ -1,10 +1,12 @@
-// Import classes
+// Import classes and functions
+import { randomBytes } from 'crypto';
 import { Event } from '@classes/Event';
 
 const prefix = process.env.PREFIX ?? '!';
 
 // Export class
-export class Ready extends Event {
+// TODO: Refactor into command handler but only if I add more commands, no point for just 3 commands imo.
+export class RoomMessage extends Event {
   // Docs say to use "any", ew: https://turt2live.github.io/matrix-bot-sdk/tutorial-bot.html
   async run(roomId: string, event: any): Promise<string | undefined> {
     if (!event.content?.msgtype || event.sender === (await this.client.getUserId())) return;
@@ -12,12 +14,15 @@ export class Ready extends Event {
     const content = event.content.body;
 
     if (content === `${prefix}createwebhook`) {
-      const webhook = await this.client.db.createWebhook({ roomId, ownerId: event.sender });
+      const secret = content.split(' ')[1] === 'true' ? randomBytes(16).toString('hex') : undefined;
+      const webhook = await this.client.db.createWebhook({ roomId, ownerId: event.sender, secret });
 
       return this.client.replyText(
         roomId,
         event,
-        `Webhook created! https://${process.env.DOMAIN}/webhooks/${webhook.token}`
+        `Webhook created! https://${process.env.DOMAIN}/webhooks/${webhook.token}${
+          secret ? ' - Secret: ' + secret : undefined
+        }`
       );
     } else if (content.startsWith(`${prefix}deletewebhook`)) {
       const token = content.split(' ')[1];
@@ -44,7 +49,9 @@ export class Ready extends Event {
         event,
         !webhooks.length
           ? 'You have no webhooks.'
-          : webhooks.map(webhook => `Token: ${webhook.token} - Room ID: ${webhook.roomId}`).join('\n')
+          : webhooks
+              .map(webhook => `Token: ${webhook.token} - Room ID: ${webhook.roomId}`)
+              .join('\n')
       );
     }
   }
