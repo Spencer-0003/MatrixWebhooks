@@ -38,8 +38,9 @@ class WebhookClient extends MatrixClient {
     });
   }
 
-  public launch(): void {
+  public async launch(): Promise<void> {
     AutojoinRoomsMixin.setupOnClient(this);
+    this.crypto.prepare(await this.getJoinedRooms());
     this._loadEvents(join(__dirname, '../events'));
     this.start();
   }
