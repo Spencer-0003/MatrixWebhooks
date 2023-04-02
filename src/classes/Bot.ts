@@ -1,6 +1,7 @@
 // Import classes and types
 import {
   AutojoinRoomsMixin,
+  AutojoinUpgradedRoomsMixin,
   MatrixClient,
   SimpleFsStorageProvider,
   RustSdkCryptoStorageProvider
@@ -40,6 +41,7 @@ class WebhookClient extends MatrixClient {
 
   public async launch(): Promise<void> {
     AutojoinRoomsMixin.setupOnClient(this);
+    AutojoinUpgradedRoomsMixin.setupOnClient(this);
     this.crypto.prepare(await this.getJoinedRooms());
     this._loadEvents(join(__dirname, '../events'));
     this.start();
