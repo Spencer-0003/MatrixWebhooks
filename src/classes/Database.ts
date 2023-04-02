@@ -19,7 +19,7 @@ class Database {
    * @param data Webhook data - { ownerId: string, roomId: string }
    * @returns Webhook database entry
    */
-  public createWebhook(data: Omit<Webhook, 'id' | 'createdAt' | 'token'>): Promise<Webhook> {
+  public createWebhook(data: { roomId: string, ownerId: string, secret?: string }): Promise<Webhook> {
     return this.prisma.webhook.create({ data });
   }
 
