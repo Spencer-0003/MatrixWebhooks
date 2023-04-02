@@ -10,8 +10,17 @@ import { db } from '@classes/Database';
 export default async function (server: FastifyInstance) {
 	server.get('/:token', async (req, res) => {
 		const webhook = await db.getWebhook((req.params as webhookParameters).token);
+		if (webhook) {
+			return res.send({
+				id: webhook.id,
+				token: webhook.token,
+				roomId: webhook.roomId,
+				ownerId: webhook.ownerId,
+				createdAt: webhook.createdAt
+			});
+		}
 
-		return res.send(webhook ?? { error: 'Invalid webhook' });
+		return res.send({ error: 'Invalid webhook' });
 	});
 
 	server.post('/:token', async (req, res) => {
@@ -25,6 +34,16 @@ export default async function (server: FastifyInstance) {
 			return res.send({ error: 'This webhook is protected with a secret.' });
 
 		client.sendMessage(webhook.roomId, { body: content, msgtype: 'm.text' });
+		return res.send('OK');
+	});
+
+	server.delete('/:token', async (req, res) => {
+		const webhook = await db.getWebhook((req.params as webhookParameters).token);
+
+		if (!webhook || (webhook.secret && (req.body as Record<string, string>).secret !== webhook.secret))
+			return res.send({ error: !webhook ? 'Invalid webhook' : 'This webhook is protected with a secret.' });
+
+		await db.deleteWebhook(webhook.token);
 		return res.send('OK');
 	});
 }
