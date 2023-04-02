@@ -7,7 +7,7 @@ Unfortunately, webhooks can't be used in encrypted rooms right now. This issue s
 ## How To Use
 Using MatrixWebhooks is simple. After deploying, just invite the bot user to a room and you're good to go. Here are the available commands:
 
-* `createwebhook` - Creates a new webhook for the current room.
+* `createwebhook <protected>` - Creates a new webhook for the current room. If protected is true, a secret will be generated to prevent people from spamming your webhook. Defaults to false.
 * `deletewebhook <webhook_token>` - Deletes an existing webhook with the matching token.
 * `webhooks` - Displays a list of all webhooks you've created along with their associated room IDs.
 
@@ -33,5 +33,6 @@ services:
 ```
 
 ## Donate
-BTC: bc1qynuzxakxn23a0vrt5ck8y6vl24hu0rtx30r2kx <br />
-XMR: 8AjCpJRHnh1T7waLq9fvtbXQ3FSGYRYVPAv1CgRKHQuwGMvHGpWzb3kFLmV4pqUdm99YXT3mK14D4NRz6dm6aHTFJmu84aN
+If you find MatrixWebhooks useful and want to support its development, consider donating using one of the following methods:
+BTC: `bc1qynuzxakxn23a0vrt5ck8y6vl24hu0rtx30r2kx` <br />
+XMR: `8AjCpJRHnh1T7waLq9fvtbXQ3FSGYRYVPAv1CgRKHQuwGMvHGpWzb3kFLmV4pqUdm99YXT3mK14D4NRz6dm6aHTFJmu84aN`
