@@ -10,7 +10,7 @@ import { db } from '@classes/Database';
 export default async function (server: FastifyInstance) {
 	server.get('/:token', async (req, res) => {
 		const webhook = await db.getWebhook((req.params as webhookParameters).token);
-		if (webhook) {
+		if (webhook) 
 			return res.send({
 				id: webhook.id,
 				token: webhook.token,
@@ -18,7 +18,7 @@ export default async function (server: FastifyInstance) {
 				ownerId: webhook.ownerId,
 				createdAt: webhook.createdAt
 			});
-		}
+		
 
 		return res.send({ error: 'Invalid webhook' });
 	});
