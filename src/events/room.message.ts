@@ -13,7 +13,7 @@ export class RoomMessage extends Event {
 
     const content = event.content.body;
 
-    if (content === `${prefix}createwebhook`) {
+    if (content.startsWith(`${prefix}createwebhook`)) {
       const secret = content.split(' ')[1] === 'true' ? randomBytes(16).toString('hex') : undefined;
       const webhook = await this.client.db.createWebhook({ roomId, ownerId: event.sender, secret });
 
