@@ -10,7 +10,7 @@ import { db } from '@classes/Database';
 export default async function (server: FastifyInstance) {
 	server.get('/:token', async (req, res) => {
 		const webhook = await db.getWebhook((req.params as webhookParameters).token);
-		if (webhook) 
+		if (webhook)
 			return res.send({
 				id: webhook.id,
 				token: webhook.token,
@@ -18,7 +18,7 @@ export default async function (server: FastifyInstance) {
 				ownerId: webhook.ownerId,
 				createdAt: webhook.createdAt
 			});
-		
+
 
 		return res.send({ error: 'Invalid webhook' });
 	});
@@ -27,6 +27,8 @@ export default async function (server: FastifyInstance) {
 		const webhook = await db.getWebhook((req.params as webhookParameters).token);
 		const body = (req.body as Record<string, string>);
 		const content = body.content;
+
+		console.log(req.body);
 
 		if (!webhook || !content)
 			return res.send({ error: !webhook ? 'Invalid webhook.' : 'You didn\'t specify any content.' });
