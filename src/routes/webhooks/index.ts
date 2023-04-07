@@ -8,6 +8,7 @@ import { db } from '@classes/Database';
 // Endpoints
 // skipcq: JS-0376, JS-0116
 export default async function (server: FastifyInstance) {
+	// Base endpoints
 	server.get('/:token', async (req, res) => {
 		const webhook = await db.getWebhook((req.params as webhookParameters).token);
 		if (webhook)
@@ -26,9 +27,7 @@ export default async function (server: FastifyInstance) {
 	server.post('/:token', async (req, res) => {
 		const webhook = await db.getWebhook((req.params as webhookParameters).token);
 		const body = (req.body as Record<string, string>);
-		const content = body.content;
-
-		console.log(req.body);
+		const { content } = body;
 
 		if (!webhook || !content)
 			return res.send({ error: !webhook ? 'Invalid webhook.' : 'You didn\'t specify any content.' });
@@ -46,6 +45,21 @@ export default async function (server: FastifyInstance) {
 			return res.send({ error: !webhook ? 'Invalid webhook' : 'This webhook is protected with a secret.' });
 
 		await db.deleteWebhook(webhook.token);
+		return res.send('OK');
+	});
+
+	// Platform specific
+	server.post('/:token/apprise', async (req, res) => {
+		const webhook = await db.getWebhook((req.params as webhookParameters).token);
+		const body = (req.body as Record<string, string>);
+		const { message, title } = body;
+
+		if (!webhook || !message)
+			return res.send({ error: !webhook ? 'Invalid webhook.' : 'You didn\'t specify any content.' });
+		else if (webhook.secret && body.secret !== webhook.secret)
+			return res.send({ error: 'This webhook is protected with a secret.' });
+
+		client.sendMessage(webhook.roomId, { body: `${title}\n${message}`, msgtype: 'm.text' });
 		return res.send('OK');
 	});
 }
