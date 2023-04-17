@@ -20,7 +20,7 @@
     "@prisma/client": "4.12.0",
     "dotenv": "16.0.3",
     "fastify": "4.15.0",
-    "matrix-bot-sdk": "0.6.4",
+    "matrix-bot-sdk": "0.6.5",
     "module-alias": "2.2.2"
   },
   "devDependencies": {
