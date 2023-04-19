@@ -8,6 +8,7 @@
 		"project": "./tsconfig.json"
 	},
     "rules": {
+        "@typescript-eslint/no-explicit-any": 0,
         "curly": ["error", "multi"]
     },
     "plugins": ["@typescript-eslint", "jsdoc", "sonarjs"],

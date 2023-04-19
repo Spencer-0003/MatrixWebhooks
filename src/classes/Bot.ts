@@ -8,11 +8,13 @@ import {
 } from 'matrix-bot-sdk';
 import { readdirSync } from 'fs';
 import { join, parse } from 'path';
+import { Command } from '@classes/Command';
 import { db } from '@classes/Database';
 
 // Create class
 class WebhookClient extends MatrixClient {
   // Properties
+  public commands: Command[];
   public db: typeof db;
 
   // Constructor
@@ -24,10 +26,21 @@ class WebhookClient extends MatrixClient {
       new RustSdkCryptoStorageProvider('./data/encryption')
     );
 
+    this.commands = [];
     this.db = db;
   }
 
   // Methods
+  private async _loadCommands(dir: string): Promise<void> {
+    readdirSync(dir, { withFileTypes: true }).forEach(async file => {
+      const importedCommand = await import(join(dir, file.name));
+      const commandClass = importedCommand[Object.keys(importedCommand)[0]];
+      const cmd = new commandClass(this);
+
+      this.commands.push(cmd);
+    });
+  }
+
   private _loadEvents(dir: string): void {
     readdirSync(dir, { withFileTypes: true }).forEach(async file => {
       const importedEvent = await import(join(dir, file.name));
@@ -42,6 +55,7 @@ class WebhookClient extends MatrixClient {
   public async launch(): Promise<void> {
     AutojoinRoomsMixin.setupOnClient(this);
     AutojoinUpgradedRoomsMixin.setupOnClient(this);
+    this._loadCommands(join(__dirname, '../commands'));
     this._loadEvents(join(__dirname, '../events'));
     this.start();
   }
