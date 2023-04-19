@@ -12,7 +12,8 @@ export class RoomMessage extends Event {
     const content = event.content.body;
     if (content.startsWith(prefix)) {
       const args = content.slice(prefix.length).trim().split(/ +/g);
-      const cmd = this.client.commands.filter(c => c.name === args.shift().toLowerCase())?.[0];
+      const cmdName = args.shift().toLowerCase();
+      const cmd = this.client.commands.filter(c => c.name === cmdName)?.[0];
 
       if (!cmd) return this.client.replyText(roomId, event, 'Unknown command.');
 
