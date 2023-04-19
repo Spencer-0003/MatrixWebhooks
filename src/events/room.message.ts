@@ -13,7 +13,7 @@ export class RoomMessage extends Event {
     if (content.startsWith(prefix)) {
       const args = content.slice(prefix.length).trim().split(/ +/g);
       const cmdName = args.shift().toLowerCase();
-      const cmd = this.client.commands.filter(c => c.name === cmdName)?.[0];
+      const cmd = this.client.commands.filter(c => c.name === cmdName)[0];
 
       if (!cmd) return this.client.replyText(roomId, event, 'Unknown command.');
 
