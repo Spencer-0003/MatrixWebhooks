@@ -31,7 +31,7 @@ class WebhookClient extends MatrixClient {
   }
 
   // Methods
-  private async _loadCommands(dir: string): Promise<void> {
+  private _loadCommands(dir: string): void {
     readdirSync(dir, { withFileTypes: true }).forEach(async file => {
       const importedCommand = await import(join(dir, file.name));
       const commandClass = importedCommand[Object.keys(importedCommand)[0]];
