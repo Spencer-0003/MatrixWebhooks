@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@fastify/formbody": "7.4.0",
-    "@fastify/helmet": "10.1.0",
+    "@fastify/helmet": "10.1.1",
     "@fastify/rate-limit": "8.0.0",
     "@prisma/client": "4.13.0",
     "dotenv": "16.0.3",
