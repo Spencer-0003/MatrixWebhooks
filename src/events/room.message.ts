@@ -7,7 +7,10 @@ const prefix = process.env.PREFIX ?? '!';
 export class RoomMessage extends Event {
   // Docs say to use "any", ew: https://turt2live.github.io/matrix-bot-sdk/tutorial-bot.html
   async run(roomId: string, event: any): Promise<unknown> {
-    if (!event.content?.msgtype || event.sender === (await this.client.getUserId())) return;
+    const userId = await this.client.getUserId();
+    const clientHomeserver = userId.split(':')[1];
+
+    if (!event.content?.msgtype || event.sender === userId) return;
 
     const content = event.content.body;
     if (content.startsWith(prefix)) {
@@ -16,6 +19,12 @@ export class RoomMessage extends Event {
       const cmd = this.client.commands.filter(c => c.name === cmdName)[0];
 
       if (!cmd) return this.client.replyText(roomId, event, 'Unknown command.');
+      else if (process.env.HOMESERVER_RESTRICTED && clientHomeserver !== event.sender.split(':')[1])
+        return this.client.replyText(
+          roomId,
+          event,
+          `Only users of the ${clientHomeserver} homeserver can use commands.`
+        );
 
       try {
         return cmd.run({ args, event, roomId });

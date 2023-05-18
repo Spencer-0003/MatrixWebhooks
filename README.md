@@ -27,6 +27,7 @@ services:
       DATABASE_URL: postgres://user:pass@postgresql/matrix_webhooks
       DOMAIN: webhooks.DOMAIN.TLD # Don't include https
       HOMESERVER: https://matrix.org
+      HOMESERVER_RESTRICTED: true # Only allow users on the same homeserver as the bot to run commands.
       PORT: 3000
       PREFIX: '!'
       SHADOW_DATABASE_URL: postgres://user:pass@postgresql/matrix_webhooks_shadow
