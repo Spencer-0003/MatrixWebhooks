@@ -8,7 +8,8 @@ export class DeleteWebhook extends Command {
   constructor(client: typeof WebhookClient) {
     super(client, {
       name: 'deletewebhook',
-      description: 'Delete a webhook.'
+      description: 'Delete a webhook.',
+      args: ['token: string']
     });
   }
 

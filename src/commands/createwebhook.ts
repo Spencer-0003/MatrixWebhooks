@@ -9,7 +9,8 @@ export class CreateWebhook extends Command {
   constructor(client: typeof WebhookClient) {
     super(client, {
       name: 'createwebhook',
-      description: 'Create a webhook.'
+      description: 'Create a webhook.',
+      args: ['protected: boolean']
     });
   }
 

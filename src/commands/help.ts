@@ -15,7 +15,17 @@ export class Help extends Command {
   run({ event, roomId }: CommandContext): Promise<string> {
     let list = '';
 
-    this.client.commands.forEach(c => (list += `${c.name} - ${c.description}\n`));
+    this.client.commands.forEach(c => {
+      list += `${c.name}`;
+
+      if (c.args) {
+        const joinedArgs = c.args.map(arg => `<${arg}>`).join(' ');
+        list += ` ${joinedArgs}`;
+      }
+
+      list += ` - ${c.description}\n`;
+    });
+
     return this.client.replyText(roomId, event, list);
   }
 }
