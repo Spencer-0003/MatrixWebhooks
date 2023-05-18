@@ -7,4 +7,5 @@ export interface CommandContext {
 export interface CommandOptions {
   name: string;
   description: string;
+  args?: string[];
 }
