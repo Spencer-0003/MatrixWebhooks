@@ -1,3 +1,3 @@
-export interface webhookParameters {
+export interface WebhookParameters {
   token: string;
 }

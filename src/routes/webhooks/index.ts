@@ -1,6 +1,7 @@
 // Imports
+import { MatrixError } from 'matrix-bot-sdk';
 import type { FastifyInstance } from 'fastify';
-import type { webhookParameters } from './schemas';
+import type { WebhookParameters } from './schemas';
 
 import { client } from '@classes/Bot';
 import { db } from '@classes/Database';
@@ -8,9 +9,17 @@ import { db } from '@classes/Database';
 // Endpoints
 // skipcq: JS-0376, JS-0116
 export default async function (server: FastifyInstance) {
+	// Sender
+	const send = (webhookClient: typeof client, roomId: string, body: string): void => {
+		webhookClient.sendMessage(roomId, { body, msgtype: 'm.txt' }).catch((err: MatrixError) => {
+			if (err.body.errcode === 'M_LIMIT_EXCEEDED')
+				setTimeout(() => send(client, roomId, body), err.retryAfterMs);
+		});
+	}
+
 	// Base endpoints
 	server.get('/:token', async (req, res) => {
-		const webhook = await db.getWebhook((req.params as webhookParameters).token);
+		const webhook = await db.getWebhook((req.params as WebhookParameters).token);
 		if (webhook)
 			return res.send({
 				id: webhook.id,
@@ -25,7 +34,7 @@ export default async function (server: FastifyInstance) {
 	});
 
 	server.post('/:token', async (req, res) => {
-		const webhook = await db.getWebhook((req.params as webhookParameters).token);
+		const webhook = await db.getWebhook((req.params as WebhookParameters).token);
 		const body = (req.body as Record<string, string>);
 		const { content } = body;
 
@@ -34,12 +43,12 @@ export default async function (server: FastifyInstance) {
 		else if (webhook.secret && body.secret !== webhook.secret)
 			return res.send({ error: 'This webhook is protected with a secret.' });
 
-		client.sendMessage(webhook.roomId, { body: content, msgtype: 'm.text' });
+		send(client, webhook.roomId, content);
 		return res.send('OK');
 	});
 
 	server.delete('/:token', async (req, res) => {
-		const webhook = await db.getWebhook((req.params as webhookParameters).token);
+		const webhook = await db.getWebhook((req.params as WebhookParameters).token);
 
 		if (!webhook || (webhook.secret && (req.body as Record<string, string>).secret !== webhook.secret))
 			return res.send({ error: !webhook ? 'Invalid webhook' : 'This webhook is protected with a secret.' });
@@ -50,7 +59,7 @@ export default async function (server: FastifyInstance) {
 
 	// Platform specific
 	server.post('/:token/apprise', async (req, res) => {
-		const webhook = await db.getWebhook((req.params as webhookParameters).token);
+		const webhook = await db.getWebhook((req.params as WebhookParameters).token);
 		const body = (req.body as Record<string, string>);
 		const { message, title } = body;
 
@@ -59,7 +68,7 @@ export default async function (server: FastifyInstance) {
 		else if (webhook.secret && body.secret !== webhook.secret)
 			return res.send({ error: 'This webhook is protected with a secret.' });
 
-		client.sendMessage(webhook.roomId, { body: `${title}\n${message}`, msgtype: 'm.text' });
+		send(client, webhook.roomId, `${title}\n${message}`);
 		return res.send('OK');
 	});
 }
