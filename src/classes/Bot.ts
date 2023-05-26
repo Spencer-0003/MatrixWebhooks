@@ -3,8 +3,8 @@ import {
   AutojoinRoomsMixin,
   AutojoinUpgradedRoomsMixin,
   MatrixClient,
-  SimpleFsStorageProvider,
-  RustSdkCryptoStorageProvider
+  RustSdkCryptoStorageProvider,
+  SimpleFsStorageProvider
 } from 'matrix-bot-sdk';
 import { readdirSync } from 'fs';
 import { join, parse } from 'path';
@@ -32,8 +32,8 @@ class WebhookClient extends MatrixClient {
 
   // Methods
   private _loadCommands(dir: string): void {
-    readdirSync(dir, { withFileTypes: true }).forEach(async file => {
-      const importedCommand = await import(join(dir, file.name));
+    readdirSync(dir, { withFileTypes: true }).forEach(file => {
+      const importedCommand = require(join(dir, file.name));
       const commandClass = importedCommand[Object.keys(importedCommand)[0]];
       const cmd = new commandClass(this);
 
@@ -42,8 +42,8 @@ class WebhookClient extends MatrixClient {
   }
 
   private _loadEvents(dir: string): void {
-    readdirSync(dir, { withFileTypes: true }).forEach(async file => {
-      const importedEvent = await import(join(dir, file.name));
+    readdirSync(dir, { withFileTypes: true }).forEach(file => {
+      const importedEvent = require(join(dir, file.name));
       const eventClass = importedEvent[Object.keys(importedEvent)[0]];
       const loadedEvent = new eventClass(this);
       const { name } = parse(file.name);

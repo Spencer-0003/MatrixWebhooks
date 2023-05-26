@@ -12,5 +12,5 @@ export abstract class Event {
   }
 
   // Methods
-  abstract run(...args: unknown[]): Promise<unknown> | unknown;
+  abstract run(...args: unknown[]): unknown;
 }
