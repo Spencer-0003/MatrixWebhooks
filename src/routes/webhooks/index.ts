@@ -1,17 +1,19 @@
 // Imports
-import { MatrixError } from 'matrix-bot-sdk';
+import type { MatrixError } from 'matrix-bot-sdk';
 import type { FastifyInstance } from 'fastify';
 import type { WebhookParameters } from './schemas';
-
+import { Converter } from 'showdown';
 import { client } from '@classes/Bot';
 import { db } from '@classes/Database';
+
+const converter = new Converter();
 
 // Endpoints
 // skipcq: JS-0376, JS-0116
 export default async function (server: FastifyInstance) {
 	// Sender
 	const send = (webhookClient: typeof client, roomId: string, body: string): void => {
-		webhookClient.sendMessage(roomId, { body, msgtype: 'm.txt' }).catch((err: MatrixError) => {
+		webhookClient.sendMessage(roomId, { body, msgtype: 'm.txt', format: 'org.matrix.custom.html', formatted_body: converter.makeHtml(body) }).catch((err: MatrixError) => {
 			if (err.body.errcode === 'M_LIMIT_EXCEEDED')
 				setTimeout(() => send(client, roomId, body), err.retryAfterMs);
 		});

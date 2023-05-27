@@ -21,10 +21,12 @@
     "dotenv": "16.0.3",
     "fastify": "4.17.0",
     "matrix-bot-sdk": "0.6.6",
-    "module-alias": "2.2.2"
+    "module-alias": "2.2.2",
+    "showdown": "2.1.0"
   },
   "devDependencies": {
     "@types/node": "20.2.5",
+    "@types/showdown": "2.0.1",
     "@typescript-eslint/eslint-plugin": "5.59.7",
     "@typescript-eslint/parser": "5.59.7",
     "eslint": "8.41.0",
