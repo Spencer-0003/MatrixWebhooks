@@ -13,7 +13,7 @@ const converter = new Converter();
 export default async function (server: FastifyInstance) {
 	// Sender
 	const send = (webhookClient: typeof client, roomId: string, body: string): void => {
-		webhookClient.sendMessage(roomId, { body, msgtype: 'm.txt', format: 'org.matrix.custom.html', formatted_body: converter.makeHtml(body) }).catch((err: MatrixError) => {
+		webhookClient.sendMessage(roomId, { body, msgtype: 'm.text', format: 'org.matrix.custom.html', formatted_body: converter.makeHtml(body) }).catch((err: MatrixError) => {
 			if (err.body.errcode === 'M_LIMIT_EXCEEDED')
 				setTimeout(() => send(client, roomId, body), err.retryAfterMs);
 		});
