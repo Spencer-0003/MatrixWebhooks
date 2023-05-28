@@ -244,7 +244,7 @@
     "@types/mime" "*"
     "@types/node" "*"
 
-"@types/showdown@^2.0.1":
+"@types/showdown@2.0.1":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@types/showdown/-/showdown-2.0.1.tgz#24134738ba3107237d6a783e054a54773e739f81"
   integrity sha512-xdnAw2nFqomkaL0QdtEk0t7yz26UkaVPl4v1pYJvtE1T0fmfQEH3JaxErEhGByEAl3zUZrkNBlneuJp0WJGqEA==
@@ -824,10 +824,10 @@ escape-string-regexp@^4.0.0:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz#14ba83a5d373e3d311e5afca29cf5bfad965bf34"
   integrity sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
 
-eslint-plugin-jsdoc@44.2.7:
-  version "44.2.7"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-44.2.7.tgz#5ecdb46ddfca209ecd58fff972a4eb74b8dde599"
-  integrity sha512-PcAJO7Wh4xIHPT+StBRpEbWgwCpIrYk75zL31RMbduVVHpgiy3Y8aXQ6pdbRJOq0fxHuepWSEAve8ZrPWTSKRg==
+eslint-plugin-jsdoc@45.0.0:
+  version "45.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-45.0.0.tgz#6be84e4842a7138cc571a907ea9c31c42eaac5c0"
+  integrity sha512-l2+Jcs/Ps7oFA+SWY+0sweU/e5LgricnEl6EsDlyRTF5y0+NWL1y9Qwz9PHwHAxtdJq6lxPjEQWmYLMkvhzD4g==
   dependencies:
     "@es-joy/jsdoccomment" "~0.39.4"
     are-docs-informative "^0.0.2"
@@ -2257,7 +2257,7 @@ shebang-regex@^3.0.0:
   resolved "https://registry.yarnpkg.com/shebang-regex/-/shebang-regex-3.0.0.tgz#ae16f1644d873ecad843b0307b143362d4c42172"
   integrity sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==
 
-showdown@^2.1.0:
+showdown@2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/showdown/-/showdown-2.1.0.tgz#1251f5ed8f773f0c0c7bfc8e6fd23581f9e545c5"
   integrity sha512-/6NVYu4U819R2pUIk79n67SYgJHWCce0a5xTP979WbNp0FL9MN1I1QK662IDU1b6JzKTvmhgI7T7JYIxBi3kMQ==
