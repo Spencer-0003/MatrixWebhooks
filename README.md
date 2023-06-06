@@ -19,7 +19,7 @@ version: '3.9'
 
 services:
   matrix_webhooks:
-    image: spencer0003/matrixwebhooks:latest
+    image: spencer0003/matrixwebhooks:latest # Or ghcr.io/spencer-0003/matrixwebhooks:latest
     container_name: MatrixWebhooks
     restart: unless-stopped
     environment:
