@@ -1,5 +1,5 @@
 # Compiler
-FROM oven/bun:latest AS compiler
+FROM node:20.2.0-bullseye-slim AS compiler
 LABEL maintainer="Spencer-0003"
 
 ENV CHECKPOINT_DISABLE=1
@@ -7,12 +7,12 @@ ENV CHECKPOINT_DISABLE=1
 WORKDIR /app
 
 COPY package.json ./
-RUN bun install
+RUN yarn
 COPY . ./
-RUN bun prisma generate && bun run build
+RUN yarn prisma generate && yarn build
 
 # Cleaner
-FROM oven/bun:latest AS cleaner
+FROM node:20.2.0-bullseye-slim AS cleaner
 LABEL maintainer="Spencer-0003"
 
 ENV CHECKPOINT_DISABLE=1
@@ -22,7 +22,7 @@ WORKDIR /app
 COPY --from=compiler /app/package.json ./
 COPY --from=compiler /app/dist ./dist
 COPY --from=compiler /app/prisma ./prisma
-RUN bun install --production
+RUN yarn --production=true
 
 # Runner
 FROM oven/bun:latest
