@@ -1,20 +1,18 @@
 # Compiler
-FROM oven/bun:latest AS compiler
+FROM node:20.2.0-bullseye-slim AS compiler
 LABEL maintainer="Spencer-0003"
 
 ENV CHECKPOINT_DISABLE=1
-RUN apt-get update && apt-get install -y unzip && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
 COPY package.json ./
-RUN bun upgrade --canary
-RUN bun install
+RUN yarn
 COPY . ./
-RUN bun prisma generate && bun run build
+RUN yarn prisma generate && yarn build
 
 # Cleaner
-FROM oven/bun:latest AS cleaner
+FROM node:20.2.0-bullseye-slim AS cleaner
 LABEL maintainer="Spencer-0003"
 
 ENV CHECKPOINT_DISABLE=1
@@ -24,19 +22,17 @@ WORKDIR /app
 COPY --from=compiler /app/package.json ./
 COPY --from=compiler /app/dist ./dist
 COPY --from=compiler /app/prisma ./prisma
-RUN bun upgrade --canary
-RUN bun install --production
+RUN yarn --production=true
 
 # Runner
-FROM oven/bun:latest
+FROM node:20.2.0-bullseye-slim
 LABEL maintainer="Spencer-0003"
 
 ENV CHECKPOINT_DISABLE=1
 
-RUN apt-get update && apt-get install -y bash unzip && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y bash && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 
 COPY --from=cleaner /app ./
-RUN bun upgrade --canary
 
-CMD ["bun", "start"]
+CMD ["yarn", "start"]

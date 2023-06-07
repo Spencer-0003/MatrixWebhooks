@@ -11,7 +11,7 @@
     "build": "tsc",
     "dev": "yarn build && yarn start",
     "lint": "prettier --config .prettierrc ./src/**/*.ts --write && eslint . --ext .ts --fix",
-    "start": "prisma migrate deploy && bun dist/index.js"
+    "start": "prisma migrate deploy && node dist/index.js"
   },
   "dependencies": {
     "@fastify/formbody": "7.4.0",
@@ -25,10 +25,10 @@
     "showdown": "2.1.0"
   },
   "devDependencies": {
+    "@types/node": "20.2.5",
     "@types/showdown": "2.0.1",
     "@typescript-eslint/eslint-plugin": "5.59.9",
     "@typescript-eslint/parser": "5.59.9",
-    "bun-types": "0.6.7",
     "eslint": "8.42.0",
     "eslint-plugin-jsdoc": "46.2.6",
     "eslint-plugin-sonarjs": "0.19.0",
