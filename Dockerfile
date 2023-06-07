@@ -3,6 +3,7 @@ FROM oven/bun:latest AS compiler
 LABEL maintainer="Spencer-0003"
 
 ENV CHECKPOINT_DISABLE=1
+RUN apt-get update && apt-get install -y unzip && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -32,7 +33,7 @@ LABEL maintainer="Spencer-0003"
 
 ENV CHECKPOINT_DISABLE=1
 
-RUN apt-get update && apt-get install -y bash && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y bash unzip && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 
 COPY --from=cleaner /app ./
