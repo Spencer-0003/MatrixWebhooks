@@ -57,7 +57,7 @@ class WebhookClient extends MatrixClient {
     AutojoinUpgradedRoomsMixin.setupOnClient(this);
     this._loadCommands(join(__dirname, '../commands'));
     this._loadEvents(join(__dirname, '../events'));
-    this.start();
+    void this.start();
   }
 }
 
