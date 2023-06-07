@@ -11,8 +11,6 @@ on:
       - LICENSE
       - README.md
 
-  workflow_dispatch:
-
 jobs:
   dockerhub:
     name: Publish to DockerHub
