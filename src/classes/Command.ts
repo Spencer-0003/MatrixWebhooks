@@ -17,5 +17,5 @@ export abstract class Command {
   }
 
   // Methods
-  abstract run(ctx: CommandContext): Promise<unknown> | unknown;
+  abstract run(ctx: CommandContext): unknown;
 }
