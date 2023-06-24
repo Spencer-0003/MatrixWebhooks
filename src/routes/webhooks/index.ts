@@ -22,17 +22,13 @@ export default async function (server: FastifyInstance) {
 	// Base endpoints
 	server.get('/:token', async (req, res) => {
 		const webhook = await db.getWebhook((req.params as WebhookParameters).token);
-		if (webhook)
-			return res.send({
-				id: webhook.id,
-				token: webhook.token,
-				roomId: webhook.roomId,
-				ownerId: webhook.ownerId,
-				createdAt: webhook.createdAt
-			});
-
-
-		return res.send({ error: 'Invalid webhook' });
+		return res.send(webhook ? {
+			id: webhook.id,
+			token: webhook.token,
+			roomId: webhook.roomId,
+			ownerId: webhook.ownerId,
+			createdAt: webhook.createdAt
+		} : { error: 'Invalid webhook' });
 	});
 
 	server.post('/:token', async (req, res) => {
