@@ -6,6 +6,7 @@ const prefix = process.env.PREFIX ?? '!';
 // Export class
 export class RoomMessage extends Event {
   // Docs say to use "any", ew: https://turt2live.github.io/matrix-bot-sdk/tutorial-bot.html
+  // skipcq: JS-0323
   async run(roomId: string, event: any): Promise<unknown> {
     const userId = await this.client.getUserId();
     const clientHomeserver = userId.split(':')[1];
