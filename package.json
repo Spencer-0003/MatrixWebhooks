@@ -17,7 +17,7 @@
     "@fastify/formbody": "7.4.0",
     "@fastify/helmet": "11.0.0",
     "@fastify/rate-limit": "8.0.3",
-    "@prisma/client": "5.0.0",
+    "@prisma/client": "5.1.0",
     "dotenv": "16.3.1",
     "fastify": "4.21.0",
     "matrix-bot-sdk": "0.6.6",
