@@ -33,7 +33,7 @@
     "eslint-plugin-jsdoc": "46.5.0",
     "eslint-plugin-sonarjs": "0.20.0",
     "prettier": "3.0.2",
-    "prisma": "5.1.1",
+    "prisma": "5.2.0",
     "typescript": "5.1.6"
   },
   "_moduleAliases": {
