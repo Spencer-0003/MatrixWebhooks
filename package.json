@@ -30,7 +30,7 @@
     "@typescript-eslint/eslint-plugin": "6.6.0",
     "@typescript-eslint/parser": "6.6.0",
     "eslint": "8.49.0",
-    "eslint-plugin-jsdoc": "46.5.1",
+    "eslint-plugin-jsdoc": "46.6.0",
     "eslint-plugin-sonarjs": "0.21.0",
     "prettier": "3.0.3",
     "prisma": "5.2.0",
