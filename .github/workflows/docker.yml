@@ -42,7 +42,7 @@ jobs:
           images: spencer0003/matrixwebhooks
 
       - name: Publish to Docker Hub
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           context: .
           platforms: linux/amd64, linux/arm64
@@ -58,7 +58,7 @@ jobs:
           password: ${{ secrets.PAT }}
 
       - name: Publish to Github
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           context: .
           push: true
