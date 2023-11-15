@@ -95,10 +95,10 @@
     fastify-plugin "^4.2.1"
     helmet "^7.0.0"
 
-"@fastify/rate-limit@8.0.3":
-  version "8.0.3"
-  resolved "https://registry.yarnpkg.com/@fastify/rate-limit/-/rate-limit-8.0.3.tgz#b63b7c6122cec424da7fc5d64da5aedb4228fa9a"
-  integrity sha512-7wbSKXGKKLI1VkpW2XvS7SFg4n4/uzYt0YA5O2pfCcM6PYaBSV3VhSKGJ9/hJceCSH+zNEDRrWpufqxbcDkTZg==
+"@fastify/rate-limit@8.1.1":
+  version "8.1.1"
+  resolved "https://registry.yarnpkg.com/@fastify/rate-limit/-/rate-limit-8.1.1.tgz#d7c55049d45334796658bc76c281cb9186c3cb6a"
+  integrity sha512-kTaIBuG7hS26rUPermw1RYsobNHxLcqA9AFUbWR8dEyRR8wknZnpfuD3VaJkrtfxyWLW8xZ5b6/GmQ/gNoEfWA==
   dependencies:
     fastify-plugin "^4.0.0"
     ms "^2.1.3"
