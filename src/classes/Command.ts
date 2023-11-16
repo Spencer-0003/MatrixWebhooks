@@ -10,7 +10,10 @@ export abstract class Command {
   args?: string[];
 
   // Constructor
-  constructor(public readonly client: typeof WebhookClient, options: CommandOptions) {
+  constructor(
+    public readonly client: typeof WebhookClient,
+    options: CommandOptions
+  ) {
     this.name = options.name;
     this.description = options.description;
     this.args = options.args;
