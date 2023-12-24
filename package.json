@@ -19,7 +19,7 @@
     "@fastify/rate-limit": "9.0.1",
     "@prisma/client": "5.7.1",
     "dotenv": "16.3.1",
-    "fastify": "4.25.1",
+    "fastify": "4.25.2",
     "matrix-bot-sdk": "0.7.0",
     "module-alias": "2.2.3",
     "showdown": "2.1.0"
