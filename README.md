@@ -1,3 +1,5 @@
+### Migrated to [usesarchbtw.lol](https://git.usesarchbtw.lol/usesarchbtw.lol/MatrixWebhooks)
+
 # Matrix Webhooks
 A simple way to receive notifications.
 
